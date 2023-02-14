@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import Textarea from './components/StyledTextArea';
 
 const App = () => {
   const [message, setMessage] = useState('');
@@ -7,6 +8,7 @@ const App = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('message is ', message)
     const res = await fetch('http://localhost:3001/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -16,10 +18,14 @@ const App = () => {
     setResponseMessage(data.message);
   };
 
+  const handleTextChange = (event) => {
+    setMessage(event.target.value);
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
+        <Textarea value={message} onChange={handleTextChange} />
         <button type="submit">Submit</button>
       </form>
       {responseMessage && (

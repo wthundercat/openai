@@ -6,8 +6,8 @@ const app = express();
 
 const { Configuration, OpenAIApi } = openAi
 const configuration = new Configuration({
-    organization: "Get it from openai",
-    apiKey: "get it from openai",
+    organization: "",
+    apiKey: "",
 });
 const openai = new OpenAIApi(configuration);
 //const response = await openai.listEngines();
@@ -24,7 +24,7 @@ app.get('/api', (req, res) => {
 
 app.post('/', async (req, res) => {
   const { message } = req.body;
-  console.log(" I am here ")
+  console.log(" I am here ", message)
 const response = await openai.createCompletion({
   model: "text-davinci-003",
   prompt: `${message}`,
